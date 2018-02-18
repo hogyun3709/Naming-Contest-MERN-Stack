@@ -4,9 +4,11 @@ import apiRouter from './api';
 // import fs from 'fs';
 
 const server = express();
-
+server.set('view engine', 'ejs');
 server.get('/', (req, res) => {
-  res.send('Hello World');
+  res.render('index', {
+    content: 'Hello!! <em>EJS!!</em>'
+  });
 });
 
 //For developemt purpose using middle ware
