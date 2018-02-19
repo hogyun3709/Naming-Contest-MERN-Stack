@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
-// const color = Math.random() > 0.5 ? 'green' : 'red';
-// ReactDOM.render(
-//   <h1 style={{color}}>Hello World {Math.random()}</h1>,
-//   document.getElementById('root')
-// );
+const App = (props) => {
+  return (
+    <h2 className="text-center">
+      {props.headerMessage}
+    </h2>
+  );
+};
+
+App.propTypes = {
+  headerMessage: PropTypes.string
+};
+
+App.defaultProps ={
+  headerMessage: 'Hello World'
+};
+
 
 ReactDOM.render(
-  <h2 className="text-center">Hello React -- {Math.random()}</h2>,
+  <App />,
   document.getElementById('root')
-)
+);

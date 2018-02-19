@@ -24,4 +24,4 @@ server.get('/profile.html', (req,res) => {
 });
 server.listen(config.port, () => {
   console.info('Express listening on port ', config.port);
-})
+});

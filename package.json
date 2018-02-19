@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node server.js --ignore public/",
-    "dev": "webpack -wd"
+    "dev": "webpack -wd",
+    "test": "xo"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "mongodb": "^3.0.2",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
