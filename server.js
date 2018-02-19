@@ -3,6 +3,7 @@ import express from 'express';
 import apiRouter from './api';
 import sassMiddleware from 'node-sass-middleware';
 import path from 'path';
+import './serverRender';
 // import fs from 'fs';
 
 const server = express();
@@ -30,6 +31,6 @@ server.use('/api', apiRouter);
 server.get('/profile.html', (req,res) => {
   res.send('Profile');
 });
-server.listen(config.port, () => {
+server.listen(config.port, config.host, () => {
   console.info('Express listening on port ', config.port);
 });
