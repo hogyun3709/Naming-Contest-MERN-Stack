@@ -7,19 +7,19 @@ const ContestList = ({ contests, onContestClick }) => {
 
   return (
     <div>
-      {contests.map(contest =>
+      {Object.keys(contests).map(contestId =>
         <ContestPreview
-          key={contest.id}
+          key={contestId}
           onClick={onContestClick}
-          {...contest} />
+          {...contests[contestId]} />
       )}
     </div>
   );
 };
 ContestList.propTypes = {
 
-  contests: React.PropTypes.array,
-  onContestClick: React.PropTypes.func.isRequired,
+  contests: PropTypes.object,
+  onContestClick: PropTypes.func.isRequired,
 
 };
 

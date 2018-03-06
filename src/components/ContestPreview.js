@@ -21,10 +21,10 @@ class ContestPreview extends Component {
 
 ContestPreview.propTypes = {
 
-  id: React.PropTypes.number.isRequired,
-  categoryName: React.PropTypes.string.isRequired,
-  contestName: React.PropTypes.string.isRequired,
-  onClick: React.PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  categoryName: PropTypes.string.isRequired,
+  contestName: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ContestPreview;
