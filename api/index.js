@@ -1,24 +1,45 @@
 import express from 'express';
-import data from '../src/testData';
+import { MongoClient } from 'mongodb';
+import assert from 'assert';
+import config from '../config';
+
+let mdb;
+
+MongoClient.connect(config.mongodbUri, (err, db) => {
+  assert.equal(null, err);
+
+  mdb = db;
+})
+
 
 const router = express.Router();
-const contests = data.contests.reduce((obj, contest)=>{
-  obj[contest.id] = contest;
-  return obj;
-}, {});
 
 router.get('/contests', (req, res) => {
-  res.send({
-    contests: contests
-  });
+  let contests = {};
+  mdb.collection('contests').find({})
+    .project({
+      id: 1,
+      categoryName: 1,
+      contestName:1
+    })
+    .each((err, contest) => {
+      assert.equal(null, err);
+
+      if(!contest){
+        res.send( { contests });
+        return;
+      }
+
+      contests[contest.id] = contest;
+
+    });
 });
 
 router.get('/contests/:contestId', (req, res) => {
-  let contest = contests[req.params.contestId];
-  contest.description = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrs standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-
-  res.send(contest);
-
-})
+  mdb.collection('contests')
+    .findOne({ id: Number(req.params.contestId)})
+    .then(contest => res.send(contest))
+    .catch(console.error);
+});
 
 export default router;
